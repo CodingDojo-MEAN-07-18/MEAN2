@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Book } from '../../models';
-import { BOOKS } from '../../data/book-data';
+// import { BOOKS } from '../../data/book-data';
+
+import { BookService } from '../../services';
 
 @Component({
   selector: 'app-book-list',
@@ -9,12 +11,16 @@ import { BOOKS } from '../../data/book-data';
   styleUrls: ['./book-list.component.css'],
 })
 export class BookListComponent implements OnInit {
-  books: Book[] = BOOKS;
+  books: Book[] = [];
   selectedBook: Book;
 
-  constructor() {}
+  constructor(private readonly bookService: BookService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.bookService.getBooks().subscribe(books => {
+      this.books = books;
+    });
+  }
 
   onSelect(book: Book) {
     console.log('selecting', book);
@@ -33,5 +39,24 @@ export class BookListComponent implements OnInit {
     console.log('creating book', event);
 
     this.books.push(event);
+  }
+
+  onDelete(id: number) {
+    console.log('delete');
+
+    this.bookService.removeBook(id).subscribe(deletedBook => {
+      // will not work!!!
+      // this.books.indexOf(book);
+
+      console.log('deleted book', deletedBook);
+
+      this.books = this.books.filter(book => book.id !== deletedBook.id);
+    });
+  }
+
+  onEvent(event: Event) {
+    console.log('eventing');
+
+    event.stopPropagation();
   }
 }
