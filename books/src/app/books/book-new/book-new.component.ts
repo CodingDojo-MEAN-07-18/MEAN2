@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { Book } from '../../models';
@@ -16,7 +17,10 @@ export class BookNewComponent implements OnInit {
   @Output()
   addBook = new EventEmitter<Book>();
 
-  constructor(private readonly bookService: BookService) {}
+  constructor(
+    private readonly bookService: BookService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit() {}
 
@@ -27,9 +31,11 @@ export class BookNewComponent implements OnInit {
     // this.books.push(this.book);
 
     this.bookService.createBook(this.book).subscribe(book => {
-      this.addBook.emit(book);
-      this.book = new Book();
-      form.reset();
+      // this.addBook.emit(book);
+      // this.book = new Book();
+      // form.reset();
+
+      this.router.navigateByUrl('/');
     });
 
     // console.log(this.books);

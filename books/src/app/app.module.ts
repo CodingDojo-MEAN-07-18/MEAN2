@@ -9,9 +9,12 @@ import * as fromBooks from './books';
 
 // import * as fromServices from './services';
 
+import { AppRoutingModule } from './app-routing.module';
+import { NavComponent } from './nav/nav.component';
+
 @NgModule({
-  declarations: [AppComponent, ...fromBooks.components],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  declarations: [AppComponent, ...fromBooks.components, NavComponent],
+  imports: [AppRoutingModule, BrowserModule, FormsModule, HttpClientModule],
   // Angular 2-5 only
   // providers: [...fromServices.services],
   bootstrap: [AppComponent],

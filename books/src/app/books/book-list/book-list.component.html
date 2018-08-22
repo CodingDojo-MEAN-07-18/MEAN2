@@ -1,4 +1,4 @@
-<app-book-new (addBook)='createBook($event)'></app-book-new>
+<!-- <app-book-new (addBook)='createBook($event)'></app-book-new> -->
 
 
 <section>
@@ -12,7 +12,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor='let book of books' (click)='onSelect(book)'>
+      <tr *ngFor='let book of books' (click)='onSelect(book)' routerLink='/books/{{book.id}}'>
         <td>{{ book.id }}</td>
         <td>{{ book.title }}</td>
         <td>{{ book.author }}</td>
@@ -25,4 +25,4 @@
   </table>
 </section>
 
-<app-book-details [book]='selectedBook'></app-book-details>
+<!-- <app-book-details [book]='selectedBook'></app-book-details> -->
