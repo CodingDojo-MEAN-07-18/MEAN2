@@ -56,7 +56,7 @@ export class BookListComponent implements OnInit, OnDestroy {
 
       console.log('deleted book', deletedBook);
 
-      this.books = this.books.filter(book => book.id !== deletedBook.id);
+      this.books = this.books.filter(book => book._id !== deletedBook._id);
     });
   }
 
